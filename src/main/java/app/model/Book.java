@@ -1,4 +1,4 @@
-package guru.springframework.spring5webapp.model;
+package app.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -19,7 +20,9 @@ public class Book {
 	
 	private String title;
 	private String isbn;
-	private String publisher;
+	
+	@OneToOne
+	private Publisher publisher;
 	
 	@ManyToMany
 	private Set<Author> authors = new HashSet<>();
@@ -30,7 +33,7 @@ public class Book {
 	}
 	
 
-	public Book(String title, String isbn, String publisher) {
+	public Book(String title, String isbn, Publisher publisher) {
 		super();
 		this.title = title;
 		this.isbn = isbn;
@@ -38,7 +41,7 @@ public class Book {
 	}
 
 
-	public Book(String title, String isbn, String publisher, Set<Author> authors) {
+	public Book(String title, String isbn, Publisher publisher, Set<Author> authors) {
 		super();
 		this.title = title;
 		this.isbn = isbn;
@@ -73,11 +76,11 @@ public class Book {
 		this.isbn = isbn;
 	}
 
-	public String getPublisher() {
+	public Publisher getPublisher() {
 		return publisher;
 	}
 
-	public void setPublisher(String publisher) {
+	public void setPublisher(Publisher publisher) {
 		this.publisher = publisher;
 	}
 
@@ -90,6 +93,8 @@ public class Book {
 	public void setAuthors(Set<Author> authors) {
 		this.authors = authors;
 	}
+	
+	
 
 
 	@Override
